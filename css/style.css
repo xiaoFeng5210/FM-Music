@@ -1,0 +1,117 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+html,body,main{
+    height:100%;
+}
+body{
+    font: 14px/1.5 Arial;
+}
+a{
+    text-decoration: none;
+    color:#444;
+}
+ul,li{
+    list-style: none;
+}
+html,body,section{
+    height:100%;
+    overflow:hidden;
+}
+.layout{
+    margin:0 auto;
+    width:600px;
+}
+@media(min-width:700px){
+    .layout{
+        width:600px;
+    }
+}
+@media(min-width:900px){
+    .layout{
+        width:800px;
+    }
+}
+@media(min-width:1200px){
+    .layout{
+        width:1100px;
+    }
+}
+
+#page-cover{
+    display: none;
+}
+.bg{
+    position: absolute;;
+    z-index:-1;
+    left: -10px;
+    top:-10px;
+    bottom:-10px;
+    right:-10px;
+    background: url(../img/timg.jpg) center center no-repeat;
+    background-size: cover;
+    filter:blur(4px);/*模糊*/
+}
+.bg::before{
+    content:'';
+    position: absolute;
+    left:0;
+    top:0;
+    bottom:0;
+    right:0;
+    background:rgba(0,0,0,0,4);
+}
+main{
+    padding-top:12vh;
+    height: calc(100%-24vh)
+}
+main::after{
+    content:'';
+    display: block;
+    clear:both;
+}
+main.aside{
+    float:left;
+}
+.aside>figure{
+    width:46vh;
+    height:46vh;
+    background-image:url(http://cloud.hunger-valley.com/music/public_tuijian_spring.jpg-big);
+    background-size: cover;
+    
+}
+main.aside.actions{
+    display:flex;
+    margin-top:4vh;
+}
+main.aside.iconfont{
+    flex:1;
+    text-align: center;
+    font-size: 5vh;
+    color:rgba(255,255,255,0.4);
+    transition:color .4s;
+    cursor: pointer/*鼠标指向目标时变成一个好看的手*/
+}
+main.aside.iconfont:hover{
+    color:#fff;
+}
+main.detail{
+    margin-left:56vh;
+    color:#fff;
+}
+main.detail.tag{
+    font-size: 2vh;
+    padding:.4em .8em;
+    background: #2e6eec;
+    
+}
+
+
+
+
+
+
+
+
