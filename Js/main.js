@@ -106,5 +106,56 @@ var Footer = {
     this.$ul.html(html)
     this.setStyle()
   },
+
+ 
   
+}
+
+
+
+var Fm={
+  init:function(){
+    this.$container=$('#page-music')
+    this.audio=new Audio()
+    this.audio.autoplay=true
+
+    this.bind()
+  },
+
+  bind:function(){
+    var _this=this
+    EventCenter.on('select-albumn',function(e,channelObj){
+      _this.channelId=channelObj.channelId
+      _this.channelName=channelObj.channelName
+      _this.loadMusic()
+    })
+    
+    
+  },
+  
+  loadMusic(callback){
+    var _this=this
+    console.log('loadMusic...')
+    $.getJSON('//jirenguapi.applinzi.com/fm/getSong.php',{channel: this.channelId})
+    .done(function(ret){
+      _this.song=ret['song'][0]
+      _this.setMusic()
+      _this.loadLyric()
+    })
+
+  },
+
+
+  setMusic(){
+    this.audio.src=this.song.url
+    $('.bg').css('background-image', 'url('+this.song.picture+')')
+    this.$container.find('.aside figure').css('background-image', 'url('+this.song.picture+')')
+    this.$container.find('.detail h1').text(this.song.title)
+    this.$container.find('.detail .author').text(this.song.artist)
+    this.$container.find('.tag').text(this.channelName)
+    this.$container.find('.btn-play').removeClass('icon-play').addClass('icon-pause')
+  }
+
+  
+
 }
