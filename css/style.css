@@ -143,12 +143,12 @@
   }
   main .area-bar{
     margin-top: 10vh;
-    display: flex;
+    
     align-items: center;
   }
   main .area-bar .bar{
     position: relative;
-    flex: 1;
+    display: flex;
     height: .8vh;
     border-radius: .2vh;
     background: rgba(255, 255, 255, 0.4);
