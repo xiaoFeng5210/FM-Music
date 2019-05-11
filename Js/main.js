@@ -166,6 +166,28 @@ var Fm={
 
   },
 
+  loadLyric(){
+    var _this=this
+    $.getJSON('//jirenguapi.applinzi.com/fm/getLyric.php',{sid: this.song.sid})
+    .done(function(ret){
+      var lyric=ret.lyric
+      var lyricObj={}
+      lyric.split('\n').forEach(function(line){
+        //[01:10.25][01:20.25]It a new day
+        var times = line.match(/\d{2}:\d{2}/g)
+        //times == ['01:10.25', '01:20.25']
+        var str = line.replace(/\[.+?\]/g, '')
+        if(Array.isArray(times)){
+          times.forEach(function(time){
+            lyricObj[time]=str
+          })
+        }
+      })
+      _this.lyricObj=lyricObj
+    })
+
+  },
+
 
   setMusic(){
     this.audio.src=this.song.url
@@ -184,6 +206,12 @@ var Fm={
     second=second.length===2?second:'0'+second
     this.$container.find('.current-time').text(min+':'+second)
     this.$container.find('.bar-progress').css('width',this.audio.currentTime/this.audio.duration*100+'%')
+    var line=this.lyricObj['0'+min+':'+second]
+    if(line){
+      this.$container.find('.lyric p').text(line)
+       .boomText()
+    }
+
   }
 
   
